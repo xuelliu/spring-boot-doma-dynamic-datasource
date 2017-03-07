@@ -1,18 +1,17 @@
 package info.matsumana;
 
-import com.google.common.collect.Maps;
 import org.seasar.doma.jdbc.Config;
 import org.seasar.doma.jdbc.DomaAbstractConfig;
 import org.seasar.doma.jdbc.dialect.Dialect;
 import org.seasar.doma.jdbc.dialect.PostgresDialect;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.TransactionAwareDataSourceProxy;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
-import java.util.Map;
 
 @Configuration
 public class AppConfig {
@@ -20,9 +19,13 @@ public class AppConfig {
     @Bean()
     public DataSource dataSource1() {
         org.apache.tomcat.jdbc.pool.DataSource ds = new org.apache.tomcat.jdbc.pool.DataSource();
-        ds.setDriverClassName("org.postgresql.Driver");
-        ds.setUrl("jdbc:postgresql://localhost:5432/db1");
-        ds.setUsername("postgres");
+//        ds.setDriverClassName("org.postgresql.Driver");
+//        ds.setUrl("jdbc:postgresql://localhost:5432/db1");
+//        ds.setUsername("postgres");
+
+        ds.setDriverClassName("com.mysql.jdbc.Driver");
+        ds.setUrl("jdbc:mysql://localhost:3306/db1");
+        ds.setUsername("root");
         ds.setDefaultAutoCommit(false);
 
         return ds;
@@ -31,23 +34,28 @@ public class AppConfig {
     @Bean()
     public DataSource dataSource2() {
         org.apache.tomcat.jdbc.pool.DataSource ds = new org.apache.tomcat.jdbc.pool.DataSource();
-        ds.setDriverClassName("org.postgresql.Driver");
-        ds.setUrl("jdbc:postgresql://localhost:5432/db2");
-        ds.setUsername("postgres");
+//        ds.setDriverClassName("org.postgresql.Driver");
+//        ds.setUrl("jdbc:postgresql://localhost:5432/db2");
+//        ds.setUsername("postgres");
+
+        ds.setDriverClassName("com.mysql.jdbc.Driver");
+        ds.setUrl("jdbc:mysql://localhost:3306/db2");
+        ds.setUsername("root");
         ds.setDefaultAutoCommit(false);
 
         return ds;
     }
 
     @Bean()
+    @Primary
     public DynamicRoutingDataSourceResolver dataSource() {
         DynamicRoutingDataSourceResolver resolver = new DynamicRoutingDataSourceResolver();
 
-        Map<Object, Object> dataSources = Maps.newHashMap();
-        dataSources.put("dataSource1", dataSource1());
-        dataSources.put("dataSource2", dataSource2());
-
-        resolver.setTargetDataSources(dataSources);
+//        Map<Object, Object> dataSources = Maps.newHashMap();
+//        dataSources.put("dataSource1", dataSource1());
+//        dataSources.put("dataSource2", dataSource2());
+//
+//        resolver.setTargetDataSources(dataSources);
 
         return resolver;
     }
