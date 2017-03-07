@@ -1,7 +1,6 @@
 package info.matsumana.app;
 
 import info.matsumana.domain.model.Employee;
-import info.matsumana.domain.model.EmployeePJ;
 import info.matsumana.domain.service.EmployeeService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,13 +14,8 @@ public class EmployeeController {
     @Inject
     EmployeeService employeeService;
 
-    @RequestMapping(method = RequestMethod.GET)
-    public Employee index() {
-        return employeeService.findById(1);
-    }
-
     @RequestMapping(path = "/batis", method = RequestMethod.GET)
-    public EmployeePJ indexMethod() {
+    public Employee indexMethod() {
         return employeeService.findByIdUsingBatis(1);
     }
 }

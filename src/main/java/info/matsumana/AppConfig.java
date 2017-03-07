@@ -65,23 +65,23 @@ public class AppConfig {
         return new DataSourceTransactionManager(dataSource());
     }
 
-    @Bean
-    public Dialect dialect() {
-        return new PostgresDialect();
-    }
-
-    @Bean
-    public Config domaConfig() {
-        return new DomaAbstractConfig() {
-            @Override
-            public Dialect getDialect() {
-                return dialect();
-            }
-
-            @Override
-            public DataSource getDataSource() {
-                return new TransactionAwareDataSourceProxy(dataSource());
-            }
-        };
-    }
+//    @Bean
+//    public Dialect dialect() {
+//        return new PostgresDialect();
+//    }
+//
+//    @Bean
+//    public Config domaConfig() {
+//        return new DomaAbstractConfig() {
+//            @Override
+//            public Dialect getDialect() {
+//                return dialect();
+//            }
+//
+//            @Override
+//            public DataSource getDataSource() {
+//                return new TransactionAwareDataSourceProxy(dataSource());
+//            }
+//        };
+//    }
 }
